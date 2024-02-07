@@ -2,7 +2,10 @@
 class Solution:
     def frequencySort(self, s: str) -> str:
         charStore = Counter(s)
-        return [char for char, _ in charStore.most_common()]
+        result = ""
+        for char, count in charStore.most_common():
+            result += char * count
+        return result
 
 
 # @leet end
