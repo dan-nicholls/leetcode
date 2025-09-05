@@ -5,6 +5,37 @@
  * @return {boolean}
  */
 var isAnagram = function(s, t) {
+	return s.length === t.length && [...s].sort().join('') === [...t].sort().join('')
+}
+
+// Time: O(n)
+// Space: O(k)
+var isAnagramMap = function(s, t) {
+	if (s.length !== t.length) return false
+
+	let sMap = {}
+
+	for (let c of s) {
+		if (sMap[c] == undefined) {
+			sMap[c] = 0
+		} else {
+			sMap[c]++
+		}
+	}
+
+	for (let c of t) {
+		if (sMap[c] === undefined || sMap[c] === 0) {
+			return false
+		}
+		sMap[c]--
+	}
+
+	return true
+};
+
+// Time: O(n^2) 
+// Space: O(n)
+var isAnagramLoop = function(s, t) {
 	let tCopy = t
 
 	for (let c of s) {
