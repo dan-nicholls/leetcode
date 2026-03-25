@@ -1,5 +1,35 @@
 // @leet start
+
+// Time = O(n)
+// Space = O(1)
 func countValidSelections(nums []int) int {
+	total := 0
+	for _, v := range nums {
+		total += v
+	}
+
+	res := 0
+	left := 0
+	for _, v := range nums {
+		right := total - left - v
+		if v == 0 {
+			diff := left - right
+			if diff == 0 {
+				res += 2
+			} else if diff == 1 || diff == -1 {
+				res++
+			}
+		}
+		left += v
+	}
+	return res
+}
+
+// n = len(nums)
+// z = number of indicies that = 0
+// S = sum of all values
+// Time = O(n * z) + O(2z) + O(n*S) ~= O(z*n*S)
+func countValidSelectionsUsingSimulation(nums []int) int {
 	res := 0
 	for _, s := range getInitialMoves(nums) {
 		for s.curr >= 0 && s.curr < len(s.nums) {
